@@ -1,0 +1,17 @@
+C:\Users\harve\Documents\Projects\Pong\bin\Debug\net8.0-windows\Pong.exe
+C:\Users\harve\Documents\Projects\Pong\bin\Debug\net8.0-windows\Pong.deps.json
+C:\Users\harve\Documents\Projects\Pong\bin\Debug\net8.0-windows\Pong.runtimeconfig.json
+C:\Users\harve\Documents\Projects\Pong\bin\Debug\net8.0-windows\Pong.dll
+C:\Users\harve\Documents\Projects\Pong\bin\Debug\net8.0-windows\Pong.pdb
+C:\Users\harve\Documents\Projects\Pong\obj\Debug\net8.0-windows\Pong.Properties.Resources.resources
+C:\Users\harve\Documents\Projects\Pong\obj\Debug\net8.0-windows\Pong.csproj.GenerateResource.cache
+C:\Users\harve\Documents\Projects\Pong\obj\Debug\net8.0-windows\Pong.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\harve\Documents\Projects\Pong\obj\Debug\net8.0-windows\Pong.AssemblyInfoInputs.cache
+C:\Users\harve\Documents\Projects\Pong\obj\Debug\net8.0-windows\Pong.AssemblyInfo.cs
+C:\Users\harve\Documents\Projects\Pong\obj\Debug\net8.0-windows\Pong.csproj.CoreCompileInputs.cache
+C:\Users\harve\Documents\Projects\Pong\obj\Debug\net8.0-windows\Pong.dll
+C:\Users\harve\Documents\Projects\Pong\obj\Debug\net8.0-windows\refint\Pong.dll
+C:\Users\harve\Documents\Projects\Pong\obj\Debug\net8.0-windows\Pong.pdb
+C:\Users\harve\Documents\Projects\Pong\obj\Debug\net8.0-windows\Pong.genruntimeconfig.cache
+C:\Users\harve\Documents\Projects\Pong\obj\Debug\net8.0-windows\ref\Pong.dll
+C:\Users\harve\Documents\Projects\Pong\obj\Debug\net8.0-windows\Pong.Form1.resources
