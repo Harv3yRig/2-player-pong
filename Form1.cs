@@ -109,8 +109,8 @@ namespace Pong
             }
             else if (ball.Right <= rightPlayer.Right && ball.Right >= rightPlayer.Left && ball.Bottom >= rightPlayer.Top && ball.Top <= rightPlayer.Bottom && ball.Bottom >= rightPlayer.Top)
             {
-                int aboveSpace = ball.Top - leftPlayer.Top;
-                int belowSpace = ball.Bottom - leftPlayer.Top;
+                int aboveSpace = ball.Top - rightPlayer.Top;
+                int belowSpace = ball.Bottom - rightPlayer.Top;
                 globalVariables.ballSpeed = -1;
                 globalVariables.verticalMovement = (calculateHitPosition(aboveSpace, belowSpace)) / 10;
             }
