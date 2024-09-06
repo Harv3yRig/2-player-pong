@@ -22,7 +22,7 @@ namespace Pong
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            setVisibility(false, true);
+            SetVisibility(false, true);
         }
 
         public void Form_KeyDown(object sender, KeyEventArgs e)
@@ -86,39 +86,12 @@ namespace Pong
             {
                 globalVariables.verticalMovement = globalVariables.verticalMovement * -1;
             }
-            if (leftPlayer.Top <= 0)
-            {
-                leftPlayer.Top = 0;
-            }
-            else if (leftPlayer.Bottom > ClientSize.Height)
-            {
-                leftPlayer.Top = ClientSize.Height - leftPlayer.Height;
-            }
-
-            if (rightPlayer.Top <= 0)
-            {
-                rightPlayer.Top = 0;
-            }
-            else if (rightPlayer.Bottom > ClientSize.Height)
-            {
-                rightPlayer.Top = ClientSize.Height - rightPlayer.Height;
-            }
 
             //ball detection system
-            if (ball.Left >= leftPlayer.Left && ball.Left <= leftPlayer.Right && ball.Bottom >= leftPlayer.Top && ball.Top <= leftPlayer.Bottom && ball.Bottom >= leftPlayer.Top)
-            {
-                int aboveSpace = ball.Top - leftPlayer.Top;
-                int belowSpace = ball.Bottom - leftPlayer.Top;
-                globalVariables.ballSpeed = 1;
-                globalVariables.verticalMovement = (calculateHitPosition(aboveSpace, belowSpace)) / 10;
-            }
-            else if (ball.Right <= rightPlayer.Right && ball.Right >= rightPlayer.Left && ball.Bottom >= rightPlayer.Top && ball.Top <= rightPlayer.Bottom && ball.Bottom >= rightPlayer.Top)
-            {
-                int aboveSpace = ball.Top - rightPlayer.Top;
-                int belowSpace = ball.Bottom - rightPlayer.Top;
-                globalVariables.ballSpeed = -1;
-                globalVariables.verticalMovement = (calculateHitPosition(aboveSpace, belowSpace)) / 10;
-            }
+            PlayerBoundDetector(leftPlayer);
+            PlayerBoundDetector(rightPlayer);
+            PlayerHitDetection(ball.Left >= leftPlayer.Left, ball.Left <= leftPlayer.Right, ball.Bottom >= leftPlayer.Top, ball.Top <= leftPlayer.Bottom, ball.Bottom >= leftPlayer.Top, leftPlayer, 1);
+            PlayerHitDetection(ball.Right <= rightPlayer.Right, ball.Right >= rightPlayer.Left, ball.Bottom >= rightPlayer.Top, ball.Top <= rightPlayer.Bottom, ball.Bottom >= rightPlayer.Top, rightPlayer, -1);
 
             //winning detection
             if (globalVariables.player1Score == globalVariables.gameTime)
@@ -135,7 +108,7 @@ namespace Pong
 
         private void StartGame_Click(object sender, EventArgs e)
         {
-                setVisibility(true, false);
+                SetVisibility(true, false);
                 if (amountOfGames.Value != 0)
                 {
                     globalVariables.gameTime = (int)amountOfGames.Value;
@@ -157,10 +130,12 @@ namespace Pong
 
         private void EndGame()
         {
-            setVisibility(false, true);
+            SetVisibility(false, true);
             startGame.Text = "Restart game?";
+            globalVariables.gameTime = 3;
+            amountOfGames.Value = 0;
         }
-        private int calculateHitPosition(int aboveSpace, int belowSpace)
+        private static int CalculateHitPosition(int aboveSpace, int belowSpace)
         {
             if (aboveSpace > belowSpace)
             {
@@ -171,7 +146,7 @@ namespace Pong
                 return belowSpace;
             }
         }
-        private void setVisibility(bool visible1, bool visible2)
+        private void SetVisibility(bool visible1, bool visible2)
         {
             clockTimer.Enabled = visible1;
             rightPlayer.Visible = visible1;
@@ -184,6 +159,27 @@ namespace Pong
             startGame.Visible = visible2;
             amountOfGames.Visible = visible2;
             amountOfGames.Enabled = visible2;
+        }
+        private void PlayerBoundDetector(PictureBox player)
+        {
+            if (player.Top <= 0)
+            {
+                player.Top = 0;
+            }
+            else if (player.Bottom > ClientSize.Height)
+            {
+                player.Top = ClientSize.Height - player.Height;
+            }
+        }
+        private void PlayerHitDetection(bool comparision1, bool comparision2, bool comparision3, bool comparision4, bool comparision5, PictureBox player, int direction)
+        {
+            if (comparision1 && comparision2 && comparision3 && comparision4 && comparision5)
+            {
+                int aboveSpace = ball.Top - player.Top;
+                int belowSpace = ball.Bottom - player.Top;
+                globalVariables.ballSpeed = direction;
+                globalVariables.verticalMovement = (CalculateHitPosition(aboveSpace, belowSpace)) / 10;
+            }
         }
     }
 }
