@@ -1,6 +1,3 @@
-using System.Drawing.Text;
-using System.Reflection.Metadata;
-
 namespace Pong
 {
     public partial class Form1 : Form
@@ -120,7 +117,7 @@ namespace Pong
             ball.Top = (ClientSize.Height - ball.Height) / 2;
         }
 
-        private void UpdateScore(Label player, ref int currentScore, int newScore)
+        private static void UpdateScore(Label player, ref int currentScore, int newScore)
         {
             currentScore = newScore;
             player.Text = $"Score: {currentScore}";
