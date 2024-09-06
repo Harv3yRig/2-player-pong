@@ -1,4 +1,4 @@
-﻿namespace Pong
+namespace Pong
 {
     partial class Form1
     {
@@ -37,9 +37,12 @@
             winner = new Label();
             player1Score = new Label();
             player2Score = new Label();
+            amountOfGames = new NumericUpDown();
+            gameLabel = new Label();
             ((System.ComponentModel.ISupportInitialize)rightPlayer).BeginInit();
             ((System.ComponentModel.ISupportInitialize)leftPlayer).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ball).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)amountOfGames).BeginInit();
             SuspendLayout();
             // 
             // rightPlayer
@@ -116,12 +119,32 @@
             player2Score.TabIndex = 6;
             player2Score.Text = "Score: ";
             // 
+            // amountOfGames
+            // 
+            amountOfGames.Location = new Point(337, 258);
+            amountOfGames.Name = "amountOfGames";
+            amountOfGames.Size = new Size(130, 23);
+            amountOfGames.TabIndex = 7;
+            // 
+            // gameLabel
+            // 
+            gameLabel.AutoSize = true;
+            gameLabel.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            gameLabel.ForeColor = Color.White;
+            gameLabel.Location = new Point(297, 230);
+            gameLabel.Name = "gameLabel";
+            gameLabel.Size = new Size(208, 25);
+            gameLabel.TabIndex = 8;
+            gameLabel.Text = "Enter amount of games";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(800, 400);
+            Controls.Add(gameLabel);
+            Controls.Add(amountOfGames);
             Controls.Add(rightPlayer);
             Controls.Add(leftPlayer);
             Controls.Add(player2Score);
@@ -141,6 +164,7 @@
             ((System.ComponentModel.ISupportInitialize)rightPlayer).EndInit();
             ((System.ComponentModel.ISupportInitialize)leftPlayer).EndInit();
             ((System.ComponentModel.ISupportInitialize)ball).EndInit();
+            ((System.ComponentModel.ISupportInitialize)amountOfGames).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -154,5 +178,7 @@
         private Label winner;
         private Label player1Score;
         private Label player2Score;
+        private NumericUpDown amountOfGames;
+        private Label gameLabel;
     }
 }
