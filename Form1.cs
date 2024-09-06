@@ -31,7 +31,7 @@ namespace Pong
             {
                 globalVariables.player1Movement = -globalVariables.playerSpeed;
             }
-            else if (e.KeyCode == Keys.S && leftPlayer.Bottom < this.ClientSize.Height)
+            else if (e.KeyCode == Keys.S && leftPlayer.Bottom < ClientSize.Height)
             {
                 globalVariables.player1Movement = globalVariables.playerSpeed;
             }
@@ -40,7 +40,7 @@ namespace Pong
             {
                 globalVariables.player2Movement = -globalVariables.playerSpeed;
             }
-            else if (e.KeyCode == Keys.Down && rightPlayer.Bottom < this.ClientSize.Height)
+            else if (e.KeyCode == Keys.Down && rightPlayer.Bottom <ClientSize.Height)
             {
                 globalVariables.player2Movement = globalVariables.playerSpeed;
             }
@@ -60,7 +60,7 @@ namespace Pong
         private void ClockTimer_Tick(object sender, EventArgs e)
         {
             //scoring detection
-            if (ball.Right >= this.ClientSize.Width)
+            if (ball.Right >= ClientSize.Width)
             {
                 globalVariables.player1Score += 1;
                 player1Score.Text = $"Score: {globalVariables.player1Score}";
@@ -82,7 +82,7 @@ namespace Pong
             leftPlayer.Top += globalVariables.player1Movement;
             rightPlayer.Top += globalVariables.player2Movement;
 
-            if(ball.Top <=0 || ball.Bottom > this.ClientSize.Height)
+            if(ball.Top <=0 || ball.Bottom > ClientSize.Height)
             {
                 globalVariables.verticalMovement = globalVariables.verticalMovement * -1;
             }
@@ -90,18 +90,18 @@ namespace Pong
             {
                 leftPlayer.Top = 0;
             }
-            else if (leftPlayer.Bottom > this.ClientSize.Height)
+            else if (leftPlayer.Bottom > ClientSize.Height)
             {
-                leftPlayer.Top = this.ClientSize.Height - leftPlayer.Height;
+                leftPlayer.Top = ClientSize.Height - leftPlayer.Height;
             }
 
             if (rightPlayer.Top <= 0)
             {
                 rightPlayer.Top = 0;
             }
-            else if (rightPlayer.Bottom > this.ClientSize.Height)
+            else if (rightPlayer.Bottom > ClientSize.Height)
             {
-                rightPlayer.Top = this.ClientSize.Height - rightPlayer.Height;
+                rightPlayer.Top = ClientSize.Height - rightPlayer.Height;
             }
 
             //ball detection system
@@ -136,12 +136,12 @@ namespace Pong
         private void StartGame_Click(object sender, EventArgs e)
         {
                 setVisibility(true, false);
-            if (amountOfGames.Value != 0)
-            {
-                globalVariables.gameTime = (int)amountOfGames.Value;
-            }
-                leftPlayer.Top = (this.ClientSize.Height) / 2;
-                rightPlayer.Top = (this.ClientSize.Height) / 2;
+                if (amountOfGames.Value != 0)
+                {
+                    globalVariables.gameTime = (int)amountOfGames.Value;
+                }
+                leftPlayer.Top = (ClientSize.Height) / 2;
+                rightPlayer.Top = (ClientSize.Height) / 2;
                 globalVariables.player1Score = 0;
                 globalVariables.player2Score = 0;
                 player1Score.Text = $"Score: {globalVariables.player1Score}";
@@ -151,8 +151,8 @@ namespace Pong
         }
         private void ResetBallPosition()
         {
-            ball.Left = (this.ClientSize.Width - ball.Width) / 2;
-            ball.Top = (this.ClientSize.Height - ball.Height) / 2;
+            ball.Left = (ClientSize.Width - ball.Width) / 2;
+            ball.Top = (ClientSize.Height - ball.Height) / 2;
         }
 
         private void EndGame()
