@@ -1,3 +1,4 @@
+using System.Drawing.Text;
 using System.Reflection.Metadata;
 
 namespace Pong
@@ -62,19 +63,11 @@ namespace Pong
             //scoring detection
             if (ball.Right >= ClientSize.Width)
             {
-                globalVariables.player1Score += 1;
-                player1Score.Text = $"Score: {globalVariables.player1Score}";
-                ResetBallPosition();
-                globalVariables.ballSpeed = 1;
-                globalVariables.verticalMovement = 0;
+                UpdateScore(player1Score, 1, ref globalVariables.player1Score);
             }
             else if (ball.Left <= 0)
             {
-                globalVariables.player2Score += 1;
-                player2Score.Text = $"Score: {globalVariables.player2Score}";
-                ResetBallPosition();
-                globalVariables.ballSpeed = -1;
-                globalVariables.verticalMovement = 0;
+                UpdateScore(player2Score, -1, ref globalVariables.player2Score);
             }
 
             ball.Left += globalVariables.ballSpeed;
@@ -90,6 +83,7 @@ namespace Pong
             //ball detection system
             PlayerBoundDetector(leftPlayer);
             PlayerBoundDetector(rightPlayer);
+
             PlayerHitDetection(ball.Left >= leftPlayer.Left, ball.Left <= leftPlayer.Right, ball.Bottom >= leftPlayer.Top, ball.Top <= leftPlayer.Bottom, ball.Bottom >= leftPlayer.Top, leftPlayer, 1);
             PlayerHitDetection(ball.Right <= rightPlayer.Right, ball.Right >= rightPlayer.Left, ball.Bottom >= rightPlayer.Top, ball.Top <= rightPlayer.Bottom, ball.Bottom >= rightPlayer.Top, rightPlayer, -1);
 
@@ -115,10 +109,8 @@ namespace Pong
                 }
                 leftPlayer.Top = (ClientSize.Height) / 2;
                 rightPlayer.Top = (ClientSize.Height) / 2;
-                globalVariables.player1Score = 0;
-                globalVariables.player2Score = 0;
-                player1Score.Text = $"Score: {globalVariables.player1Score}";
-                player2Score.Text = $"Score: {globalVariables.player2Score}";
+                UpdateScore(player1Score, ref globalVariables.player1Score, 0);
+                UpdateScore(player2Score, ref globalVariables.player2Score, 0);
                 globalVariables.verticalMovement = 0;
                 winner.Text = "";
         }
@@ -128,23 +120,17 @@ namespace Pong
             ball.Top = (ClientSize.Height - ball.Height) / 2;
         }
 
+        private void UpdateScore(Label player, ref int currentScore, int newScore)
+        {
+            currentScore = newScore;
+            player.Text = $"Score: {currentScore}";
+        }
         private void EndGame()
         {
             SetVisibility(false, true);
             startGame.Text = "Restart game?";
             globalVariables.gameTime = 3;
             amountOfGames.Value = 0;
-        }
-        private static int CalculateHitPosition(int aboveSpace, int belowSpace)
-        {
-            if (aboveSpace > belowSpace)
-            {
-                return aboveSpace;
-            }
-            else
-            {
-                return belowSpace;
-            }
         }
         private void SetVisibility(bool visible1, bool visible2)
         {
@@ -178,8 +164,27 @@ namespace Pong
                 int aboveSpace = ball.Top - player.Top;
                 int belowSpace = ball.Bottom - player.Top;
                 globalVariables.ballSpeed = direction;
-                globalVariables.verticalMovement = (CalculateHitPosition(aboveSpace, belowSpace)) / 10;
+                globalVariables.verticalMovement = CalculateHitPosition(aboveSpace, belowSpace) / 10;
             }
+        }
+        private static int CalculateHitPosition(int aboveSpace, int belowSpace)
+        {
+            if (aboveSpace > belowSpace)
+            {
+                return aboveSpace;
+            }
+            else
+            {
+                return belowSpace;
+            }
+        }
+        private void UpdateScore(Label scoreLabel, int dir, ref int score)
+        {
+            score += 1;
+            UpdateScore(scoreLabel, ref score, score);
+            ResetBallPosition();
+            globalVariables.ballSpeed = dir;
+            globalVariables.verticalMovement = 0;
         }
     }
 }
